@@ -4,47 +4,43 @@ import cheerio from 'cheerio';
 export class WebCrawlerController {
   url: string;
   links: string[];
+  subDomain: string;
 
-  constructor(inputURL: string) {
+  constructor(inputURL: string, hrefSubDomain: string) {
     this.url = inputURL.endsWith( '/') ? inputURL : inputURL + '/';
     this.links = [];
-  }
+    this.subDomain = hrefSubDomain;
+  };
 
-  async fetch(){
+  fetch = async(): Promise<string[]> => {
     try {
       await this.getPageLinks();
-      this.links = [... new Set(this.links)];
-      return this.links;
+      this.links = [... new Set(this.links)]; 
     } catch (error) {
-      throw error;
+      console.log('An error occured fetching page')
     }
-  }
+    return this.links;
+  };
 
-  async getPageLinks(){
+  getPageLinks = async () => {
     try {
       const response = await this.getPageData();
-      const $ = cheerio.load(response);
-      const links = $('a[href^="' + this.url + '"]')
+      const $ = cheerio.load(response ? response: '');
+      const links = $('a[href^="' + this.subDomain + '"]')
         .map((i, el) => $(el).attr('href'))
         .get();
-      console.log('*******', links);
+      this.links = links;
     } catch (error) {
-      throw new Error('An error occured retrieving link');
+      console.log('An error occured retrieving page links')
     }
-  }
+  };
 
-  async getPageData(){
+  getPageData = async () => {
     try {
       const response = await axios.get(this.url);
       return response.data;
-    } catch (error) {
-      throw error;
+    } catch (error:any) {
+     console.log(`A ${error.response.status} status code occured retrieving url: ${this.url}`);
     }
-  }
-
-  async crawlPageLinks(links: string[]){
-    for(let link of links){
-      console.log('*******', link);
-    }
-  }
+  };
 }

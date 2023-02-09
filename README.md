@@ -33,7 +33,7 @@ Implement program using node.js with typescript. Node.js will allow us to run ou
   Use arguments provided to command prompt as url starting point.
 
   - Get subdomain
-  Parse command prompt argument for url subdomain. This will be set to limit crawler from visiting external links. Cast url string to new URL type and pull hostname value from url object. This will be done to all links to insure no external links are followed. ----******uSing a new method now***** parsed with cheerio link selector
+  Parse command prompt argument for url subdomain. This will be set to limit crawler from visiting external links. Cast url string to new URL type and pull origin value from url object. Concatenate subdomain into href selector value for links. 
 
   - Web crawl
   Axios will be used for fetching wesite data and Cheerio will also be used to parse HTML. After visiting a page I will leverage Cheerio to pull all links filtering by subdomain. If more links are found the process of visiting and finding links will be repeated until all pages are visited and all links found. 
@@ -45,11 +45,13 @@ Implement program using node.js with typescript. Node.js will allow us to run ou
   When the crawler has finished its job I will print the json object to the terminal displaying all the urls and the links on their pages.
 
 ### Affected Data Model
+
 ```typescript
 let urlByLinks: Map<string, string[]> = {
   "https://www.monzo.com/" : ["https://www.monzo.com/about-us","https://www.monzo.com/contact-us", ...],
 }
 ```
+
 ### Lmitations/Trade-offs
 
 1. Only one url can be crawled at a time
@@ -59,14 +61,64 @@ let urlByLinks: Map<string, string[]> = {
 3. 
 
 ### Error Handling
+
   - Axios error
-  Display errors message passed back on terminal to user.
+  Display error code passed back on terminal to user.
   - URL error
-  Display error message received during string to URL type conversion. 
+  Display error message received during string to URL type conversion.
+  - Cheerio error
+  Display message indicating error retrieving links 
+  - Running project error
+  Display error message from bad url input
 
 ## Getting Started
+
+- unzip file or clone the repo
+
+- HTTPS
+
+```terminal
+git clone https://github.com/jccraigw/simple-web-crawler.git
+```
+
+- SSH
+
+```terminal
+git clone git@github.com:jccraigw/simple-web-crawler.git 
+```
+
 ## Manual Installation
+
 ### Prerequisites
+
+- `node v16.2.0`
+- `ts-node v10.9.1`
+- `typescript v4.9.5`
+
 ### Install Dependencies
+
+- Make sure to install _node_modules_ before running the project:
+
+```terminal
+yarn install or npm install
+```
+
 ### Run the Project
-  if you see zsh: command not found: ts-node need to install ts-code globally ```npm install -g ts-node``` or use npx ts-node index.ts
+
+- Run the project using
+
+```terminal
+ts-node index.ts https://monzo.com
+```
+
+if you see the following error
+```zsh: command not found: ts-node ```
+you will need to install ts-code globally ```npm install -g ts-node``` or use npx ts-node index.ts https://monzo.com
+
+### Test the Project
+
+- Test the project using
+
+```terminal
+ts-node index.ts https://monzo.com
+```
