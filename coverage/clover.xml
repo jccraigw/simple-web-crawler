@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1675975035221" clover="3.2.0">
-  <project timestamp="1675975035221" name="All files">
+<coverage generated="1675975432588" clover="3.2.0">
+  <project timestamp="1675975432588" name="All files">
     <metrics statements="27" coveredstatements="25" conditionals="4" coveredconditionals="2" methods="9" coveredmethods="9" elements="40" coveredelements="36" complexity="0" loc="27" ncloc="27" packages="1" files="1" classes="1"/>
     <file name="WebCrawlerController.ts" path="/Users/julian/simple-web-crawler/classes/WebCrawlerController.ts">
       <metrics statements="27" coveredstatements="25" conditionals="4" coveredconditionals="2" methods="9" coveredmethods="9"/>
