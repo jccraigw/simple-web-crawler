@@ -15,7 +15,7 @@ export class WebCrawlerController {
   fetch = async(): Promise<string[]> => {
     try {
       await this.getPageLinks();
-      this.links = [... new Set(this.links)]; 
+      this.links = [... new Set(this.links)];
     } catch (error) {
       console.log('An error occured fetching page')
     }
@@ -26,10 +26,16 @@ export class WebCrawlerController {
     try {
       const response = await this.getPageData();
       const $ = cheerio.load(response ? response: '');
-      const links = $('a[href^="' + this.subDomain + '"]')
+
+      const relativeLinks = $('a[href^="/"]')
+        .map((i, el) =>  this.subDomain + $(el).attr('href'))
+        .get();
+
+      const absoluteLinks = $('a[href^="' + this.subDomain + '"]')
         .map((i, el) => $(el).attr('href'))
         .get();
-      this.links = links;
+
+      this.links = [...relativeLinks,...absoluteLinks];
     } catch (error) {
       console.log('An error occured retrieving page links')
     }
@@ -40,7 +46,7 @@ export class WebCrawlerController {
       const response = await axios.get(this.url);
       return response.data;
     } catch (error:any) {
-     console.log(`A ${error.response.status} status code occured retrieving url: ${this.url}`);
+      console.log(`A ${error.response.status} status code occured retrieving url: ${this.url}`);
     }
   };
 }

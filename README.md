@@ -58,7 +58,7 @@ let urlByLinks: Map<string, string[]> = {
 
 2. Can not use frameworks to handle crawling
 
-3. 
+3. With more time I would like to have more robust error handling  
 
 ### Error Handling
 
@@ -113,7 +113,7 @@ ts-node index.ts https://monzo.com
 
 if you see the following error
 ```zsh: command not found: ts-node ```
-you will need to install ts-code globally ```npm install -g ts-node``` or use npx ts-node index.ts https://monzo.com
+you will need to install ts-code globally ```npm install -g ts-node``` or use ```npx ts-node index.ts https://monzo.com```
 
 ### Test the Project
 

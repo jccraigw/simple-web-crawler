@@ -24,9 +24,10 @@ const crawlPageLinks = async (links: string[], subDomain: string) => {
 };
 
 const printUrlByLinks = () => {
-  console.log('######################');
-  console.log(urlByLinks);
-  console.log('######################');
+  console.log('##################<VISITED URLS AND LINKS ON PAGE>#############################');
+  const obj = Object.fromEntries(urlByLinks);
+  console.log(JSON.stringify(obj, null, 2));
+  console.log('##################</VISITED URLS AND LINKS ON PAGE>#############################');
 };
 
 const main = async () => {
@@ -34,6 +35,7 @@ const main = async () => {
     let url: URL = new URL(getStartingURL());
     let subDomain: string = url.origin;
 
+    console.log('##################<Crawling Started....>#############################');
     await crawlPageLinks([url.href], subDomain);
     printUrlByLinks();
   } catch (error: any) {
