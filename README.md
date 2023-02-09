@@ -94,6 +94,8 @@ git clone git@github.com:jccraigw/simple-web-crawler.git
 - `node v16.2.0`
 - `ts-node v10.9.1`
 - `typescript v4.9.5`
+- `ts-jest v29.0.5`
+- `@types/jest v29.4.0`
 
 ### Install Dependencies
 
@@ -120,5 +122,5 @@ you will need to install ts-code globally ```npm install -g ts-node``` or use ``
 - Test the project using
 
 ```terminal
-ts-node index.ts https://monzo.com
+npm run test
 ```
