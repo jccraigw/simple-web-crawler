@@ -58,7 +58,9 @@ let urlByLinks: Map<string, string[]> = {
 
 2. Can not use frameworks to handle crawling
 
-3. With more time I would like to have more robust error handling  
+3. With more time I would like to have more robust error handling
+
+4. Basic print display could be improved
 
 ### Error Handling
 
@@ -107,7 +109,7 @@ yarn install or npm install
 
 ### Run the Project
 
-- Run the project using
+- Run the project using the follow with the desired url to be crawled as an arugument.
 
 ```terminal
 ts-node index.ts https://monzo.com
